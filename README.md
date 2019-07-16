@@ -1,6 +1,12 @@
 # HolyShift
 # Created by: Maulbatross (Kronos 3)
-- Some functions borrowed from CatDruidDPS by Cernie
+- Functions borrowed from CatDruidDPS by Cernie and modified for efficiency and compatibility:
+  - EShift
+  - ToggleAutoAttack
+  - HSBuffChk
+  - GetSpellID
+  - GetActiveForm
+  - findAttackActionSlot
 
 A cat druid one-button dps addon for vanilla WoW 1.12 and other useful feral druid functions.
 
