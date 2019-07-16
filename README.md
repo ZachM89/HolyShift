@@ -49,7 +49,7 @@ To use one button cat dps:
 - Automatically uses a major healthstone if you have a major healthstone and when you are below 40% health.
 - Provides estimated time remaining in fight and the option to turn this feature off.
 
-Included misc functions that can be called with /run FunctionName():
+# Included misc functions that can be called with /run FunctionName():
 - Make sure to match capitization and spelling exactly to use these functions.
 - AutoBuff()
   - Uses consumables for cat dps in a raid. (Make sure you have yourself targeted so as not to put Jujus on someone else XD)
