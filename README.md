@@ -1,5 +1,6 @@
 # HolyShift
 # Created by: Maulbatross (Kronos 3)
+- Some functions borrowed from CatDruidDPS by Cernie
 A cat druid one-button dps addon for vanilla WoW 1.12 and other useful feral druid functions.
 
 Note: This is designed for use at level 60. I have not tested it below level 60.
