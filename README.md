@@ -29,8 +29,8 @@ To use one button cat dps:
 - When stealthed, automatically pops Tiger's Fury and opens with Ravage
 - Automatically switches from Shred to Claw if you are not behind a target or the target is targeting you.
 - Option to primarily use Claw on mobs other than bosses. (can be switched off)
-- Automatically uses Innervate, Mana Potions, Rune of Metamorphosis, and Demonic Runes when you are low on mana (only on bosses to conserve
-  consumables.)
+- Automatically uses Innervate, Mana Potions, Rune of Metamorphosis, and Demonic Runes when you are low on mana (only on bosses to conserve consumables.)
+  - Will not use a demonic rune if it will potentially kill you.
   - Option to swith off Innervate, Mana Potions, and Demonic runes. 
 - Automatically uses dps trinkets on bosses such as: Earthstrike, Kiss of the Spider.
 - Automatically uses Ancient Cornerstone Grimoire on bosses.
