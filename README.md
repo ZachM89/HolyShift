@@ -1,4 +1,5 @@
 # HolyShift
+A cat druid one-button dps addon for vanilla WoW 1.12 and other useful feral druid functions.
 # Created by: Maulbatross (Kronos 3)
 - Functions borrowed from CatDruidDPS by Cernie and modified for efficiency and compatibility:
   - EShift
@@ -7,13 +8,8 @@
   - GetSpellID
   - GetActiveForm
   - findAttackActionSlot
-
-A cat druid one-button dps addon for vanilla WoW 1.12 and other useful feral druid functions.
-
-Note: This is designed for use at level 60. I have not tested it below level 60.
-
 # To open settings type: /hsdps
-
+Note: This is designed for use at level 60. I have not tested it below level 60.
 # To use one button cat dps: 
   - Create a macro that only has the text: /hsdps dps
   - If you put the macro button on your main bar, put it in the same spot for human form and cat form. (Otherwise you will have to 
