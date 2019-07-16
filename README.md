@@ -12,13 +12,13 @@ A cat druid one-button dps addon for vanilla WoW 1.12 and other useful feral dru
 
 Note: This is designed for use at level 60. I have not tested it below level 60.
 
-To open settings type: /hsdps
+# To open settings type: /hsdps
 
-To use one button cat dps: 
+# To use one button cat dps: 
   - Create a macro that only has the text: /hsdps dps
   - If you put the macro button on your main bar, put it in the same spot for human form and cat form. (Otherwise you will have to 
     constantly alternate keys)
-
+# 
 - Automatically power-shifts when you don't have enough energy to use your combo point builder or Ferocious bite. (can be switched off)
   - I turn this off when I am solo farming in the world.
 - Will not shift you out of cat form if you do not have enough mana to go back in.
