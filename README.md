@@ -8,6 +8,8 @@ A cat druid one-button dps addon for vanilla WoW 1.12 and other useful feral dru
   - GetSpellID
   - GetActiveForm
   - findAttackActionSlot
+  - isTDebuff
+  
 # To open settings type: /hsdps
 Note: This is designed for use at level 60. I have not tested it below level 60.
 # To use one button cat dps: 
