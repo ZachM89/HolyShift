@@ -2,13 +2,9 @@
 A cat druid one-button dps addon for vanilla WoW 1.12 and other useful feral druid functions.
 # Created by: Maulbatross (Kronos 3)
 - Functions borrowed from CatDruidDPS by Cernie and modified for efficiency and compatibility:
-  - EShift
-  - ToggleAutoAttack
   - HSBuffChk
-  - GetSpellID
-  - GetActiveForm
-  - findAttackActionSlot
-  - isTDebuff
+  - FindAttackActionSlot
+  - IsTDebuff
   
 # To open settings type: /hsdps
 Note: This is designed for use at level 60. I have not tested it below level 60.
@@ -23,7 +19,7 @@ Note: This is designed for use at level 60. I have not tested it below level 60.
 - Prioritizes your combo point builder when clearcasting is procced.
 - Dynamically changes the combo point threshold for Ferocious Bite so as to not waste combo points if a mob is about to die.
   - Always set to 5 combo points for bosses.
-- Automatically applies Faerie Fire at moments where it will minimally affect DPS or GCD
+- Automatically applies Faerie Fire at moments where it will minimally affect DPS or GCD(can be switched off)
   - When you are too far away to hit with a melee ability.
   - When you are about to power shift and the target doesn't already have Faerie Fire.
 - Automatically uses Cower if you are in a group and you have agro (can be switched off)
@@ -39,10 +35,10 @@ Note: This is designed for use at level 60. I have not tested it below level 60.
 - Automatically uses Innervate, Mana Potions, Rune of Metamorphosis, and Demonic Runes when you are low on mana (only on bosses to conserve consumables.)
   - Will not use a demonic rune if it will potentially kill you.
   - Option to swith off Innervate, Mana Potions, and Demonic runes. 
-- Automatically uses dps trinkets on bosses such as: Earthstrike, Kiss of the Spider.
+- Automatically uses dps trinkets on bosses such as: Earthstrike, Kiss of the Spider, Jom Gabbar, and Zandalarian Hero Medallion.
 - Automatically uses Ancient Cornerstone Grimoire on bosses.
 - Automatically uses Juju Flurry on bosses.
-- Automatically uses Manual Crowd Pummeler on bosses and switches out manual crowd pummeler if the mcp you have equipped has no charges.
+- Automatically uses Manual Crowd Pummeler on bosses and switches out manual crowd pummeler to a weapon and offhand of your choosing if   the mcp you have equipped has no charges.
 - Automatically uses Hourglass Sand when you have the Bronze debuff on Chromaggus.
 - Automatically uses a major healthstone if you have a major healthstone and when you are below 40% health.
 - Provides estimated time remaining in fight and the option to turn this feature off.
@@ -52,7 +48,7 @@ Note: This is designed for use at level 60. I have not tested it below level 60.
 - AutoBuff()
   - Uses consumables for cat dps in a raid. (Make sure you have yourself targeted so as not to put Jujus on someone else XD)
     - Will not overwrite buffs that are already active. 
-- pummeler()
+- Pummel()
   - A spammable macro to pop Manual Crowd Pummeler so as not to accidentally burn two charges in quick succession.
 - PatchHeal()
   - Designed for use on Patchwerk. Typically druids are not hateful strike healers so it is unlikely that you will use this one.
@@ -64,7 +60,7 @@ Note: This is designed for use at level 60. I have not tested it below level 60.
     - For example when the need arises to taunt off of another tank.
   - You can add blacklist names if you are comfortable editing the HolyShiftCore.lua file. Leave this alone if you don't know what you
     are doing.
-- QkStone()
+- QuickStone()
   - For use when you are tanking a very hard-hitting mob.
   - Shifts you out of bear form, uses a Greater Stoneshield Potion, then shifts you back into Bear Form. Spammable.
 - QuickHT()
