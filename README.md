@@ -37,8 +37,8 @@ Note: This is designed for use at level 60. I have not tested it below level 60.
   - Option to swith off Innervate, Mana Potions, and Demonic runes. 
 - Automatically uses dps trinkets on bosses such as: Earthstrike, Kiss of the Spider, Jom Gabbar, and Zandalarian Hero Medallion.
 - Automatically uses Ancient Cornerstone Grimoire on bosses.
-- Automatically uses Juju Flurry on bosses.
-- Automatically uses Manual Crowd Pummeler on bosses and switches out manual crowd pummeler to a weapon and offhand of your choosing if   the mcp you have equipped has no charges.
+- Automatically uses Juju Flurry on bosses.(can be switched off)
+- Automatically uses Manual Crowd Pummeler on bosses and switches out manual crowd pummeler to a weapon and offhand of your choosing if   the mcp you have equipped has no charges.(can be switched off)
 - Automatically uses Hourglass Sand when you have the Bronze debuff on Chromaggus.
 - Automatically uses a major healthstone if you have a major healthstone and when you are below 40% health.
 - Provides estimated time remaining in fight and the option to turn this feature off.
