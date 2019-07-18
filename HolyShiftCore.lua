@@ -557,7 +557,7 @@ function Atk(CorS,stealthyn,romyn,romcd)
 	local shth = 15
 	local impshred = SpecCheck(2,9)
 	local copobu = 100 - (40 + impshred*6 + 20)
-	local currentMana, maxMana = LunaUF.DruidManaLib:GetMana()
+	local currentMana, maxMana = AceLibrary("DruidManaLib-1.0"):GetMana()
 	local shredtext = "Spell_Shadow_VampiricAura"
 	local clawtext = "Ability_Druid_Rake"
 	local kotscd,kotseq,kotsbag,kotsslot = ItemInfo('Kiss of the Spider')
@@ -669,7 +669,7 @@ function Atk(CorS,stealthyn,romyn,romcd)
 end
 function CanShift()
 	local canshift = false
-	local currentMana, maxMana = LunaUF.DruidManaLib:GetMana()
+	local currentMana, maxMana = AceLibrary("DruidManaLib-1.0"):GetMana()
 	local manathreshold = 90
 	local mpcd,_,mpbag,mpslot = ItemInfo('Major Mana Potion')
 	local smcd,_,smbag,smslot = ItemInfo('Superior Mana Potion')
@@ -1130,7 +1130,7 @@ end
 --------------------------------------------------------
 function QuickCast(spell,target)
 	local pwrtype=UnitPowerType('Player')
-	local curMana, mxMana = LunaUF.DruidManaLib:GetMana()
+	local curMana, mxMana = AceLibrary("DruidManaLib-1.0"):GetMana()
 	if HSBuffChk('TravelForm') == true or HSBuffChk('AquaticForm') == true then
 		QuickShift()
 	elseif pwrtype == 3 then
@@ -1195,7 +1195,7 @@ function QuickHT()
 	local pwrtype=UnitPowerType('Player')
 	local ranks = {'Healing Touch(Rank 11)','Healing Touch(Rank 10)','Healing Touch(Rank 9)','Healing Touch(Rank 8)',
 	'Healing Touch(Rank 7)','Healing Touch(Rank 6)','Healing Touch(Rank 5)','Healing Touch(Rank 4)','Healing Touch(Rank 3)'}
-	local curMana, mxMana = LunaUF.DruidManaLib:GetMana()
+	local curMana, mxMana = AceLibrary("DruidManaLib-1.0"):GetMana()
 	local manacost = {1277,1197,1077,972,882,812,747,662,587}
 	local healththreshold = {0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.95,0.98}
 	if UnitHealth('player') < UnitHealthMax('player') then
