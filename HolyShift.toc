@@ -2,6 +2,6 @@
 ## Title: HolyShift
 ## Notes: Max cat dps
 ## Author: Maulbatross K3
-## SavedVariables: HSInnervateUse,HSMCPUse,HSMPUse,HSDRUse,HSFLUse,HSClawAdd,HSTigerUse,HSShiftUse,HSCowerUse,HSTrinketOne,HSTrinketTwo,HSDeathrate
+## SavedVariables: HSInnervateUse,HSMCPUse,HSMPUse,HSDRUse,HSFLUse,HSClawAdd,HSTigerUse,HSShiftUse,HSCowerUse,HSWeapon,HSOffhand,HSDeathrate,HSAutoFF
 ## DefaultState: enabled
 HolyShift.xml

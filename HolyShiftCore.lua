@@ -6,6 +6,7 @@ local combstarttime = nil
 local temptime = nil
 local numtargets = 0
 local reportthreshold = 80
+local playername,_ = UnitName('player')
 function HolyShift_OnLoad()
     if UnitClass("player") == "Druid" then
         this:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -27,114 +28,177 @@ end
 function HolyShift_SlashCommand(msg)
 
 	local _,_, HScommand,HSoption = string.find(msg, "([%w%p]+)%s*(.*)$")
-	--local _,_, HScommand, HSoption = string.find(msg,"([%w%p]+)%s(.)$")
 	--HSPrint(HScommand)
 	if HScommand == "dps" then
-		HolyShiftAddon(HSInnervateUse,HSMCPUse,HSMPUse,HSDRUse,HSFLUse,HSClawAdd,HSTigerUse,HSShiftUse,HSCowerUse,HSTrinketOne,HSTrinketTwo,HSDeathrate)
+		HolyShiftAddon()
 	elseif HScommand == "innervate" then 
 		if HSoption == "on" then
 			HSInnervateUse = 1
-			HSPrint('|cff008000HolyShift innervate enabled. HSInnervateUse = |cffffffff'..HSInnervateUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Innervate |cffecd226Enabled. |cffd08524HSInnervateUse = |cffffffff'..HSInnervateUse)
 		elseif HSoption == "off" then
 			HSInnervateUse = 0
-			HSPrint('|cff008000HolyShift innervate disabled. HSInnervateUse = |cffffffff'..HSInnervateUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Innervate |cffecd226Disabled. |cffd08524HSInnervateUse = |cffffffff'..HSInnervateUse)
 		end
 	elseif HScommand == "mcp" then 
 		if HSoption == "on" then
 			HSMCPUse = 1
-			HSPrint('|cff008000HolyShift manual crowd pummeler enabled. HSMCPUse = |cffffffff'..HSMCPUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Manual Crowd Pummeler |cffecd226Enabled. |cffd08524HSMCPUse = |cffffffff'..HSMCPUse)
 		elseif HSoption == "off" then
 			HSMCPUse = 0
-			HSPrint('|cff008000HolyShift manual crowd pummeler disabled. HSMCPUse = |cffffffff'..HSMCPUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Manual Crowd Pummeler |cffecd226Disabled. |cffd08524HSMCPUse = |cffffffff'..HSMCPUse)
 		end
 	elseif HScommand == "manapot" then 
 		if HSoption == "on" then
 			HSMPUse = 1
-			HSPrint('|cff008000HolyShift mana pot use enabled. HSMPUse = |cffffffff'..HSMPUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto use Mana Potion |cffecd226Enabled. |cffd08524HSMPUse = |cffffffff'..HSMPUse)
 		elseif HSoption == "off" then
 			HSMPUse = 0
-			HSPrint('|cff008000HolyShift mana pot use disabled. HSMPUse = |cffffffff'..HSMPUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto use Mana Potion |cffecd226Disabled. |cffd08524HSMPUse = |cffffffff'..HSMPUse)
 		end
 	elseif HScommand == "demonicrune" then 
 		if HSoption == "on" then
 			HSDRUse = 1
-			HSPrint('|cff008000HolyShift demonic rune use enabled. HSDRUse = |cffffffff'..HSDRUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto use Demonic Rune |cffecd226Enabled. |cffd08524HSDRUse = |cffffffff'..HSDRUse)
 		elseif HSoption == "off" then
 			HSDRUse = 0
-			HSPrint('|cff008000HolyShift demonic rune use disabled. HSDRUse = |cffffffff'..HSDRUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto use Demonic Rune |cffecd226Disabled. |cffd08524HSDRUse = |cffffffff'..HSDRUse)
 		end
 	elseif HScommand == "flurry" then 
 		if HSoption == "on" then
 			HSFLUse = 1
-			HSPrint('|cff008000HolyShift juju flurry use enabled. HSFLUse = |cffffffff'..HSFLUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Juju Flurry |cffecd226Enabled. |cffd08524HSFLUse = |cffffffff'..HSFLUse)
 		elseif HSoption == "off" then
 			HSFLUse = 0
-			HSPrint('|cff008000HolyShift juju flurry use disabled. HSFLUse = |cffffffff'..HSFLUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Juju Flurry |cffecd226Disabled. |cffd08524HSFLUse = |cffffffff'..HSFLUse)
 		end
 	elseif HScommand == "clawadds" then 
 		if HSoption == "on" then
 			HSClawAdd = 1
-			HSPrint('|cff008000HolyShift claw non-bosses enabled. HSClawAdd = |cffffffff'..HSClawAdd)
+			HSPrint('|cffd08524HolyShift |cffffffffClaw Non-Bosses |cffecd226Enabled. |cffd08524HSClawAdd = |cffffffff'..HSClawAdd)
 		elseif HSoption == "off" then
 			HSClawAdd = 0
-			HSPrint('|cff008000HolyShift claw non-bosses disabled. HSClawAdd = |cffffffff'..HSClawAdd)
+			HSPrint('|cffd08524HolyShift |cffffffffClaw Non-Bosses |cffecd226Disabled. |cffd08524HSClawAdd = |cffffffff'..HSClawAdd)
 		end
 	elseif HScommand == "tiger" then 
 		if HSoption == "on" then
 			HSTigerUse = 1
-			HSPrint("|cff008000HolyShift tiger's fury enabled. HSTigerUse = |cffffffff"..HSTigerUse)
+			HSPrint("|cffd08524HolyShift |cffffffffAuto Tiger's Fury |cffecd226Enabled. |cffd08524HSTigerUse = |cffffffff"..HSTigerUse)
 		elseif HSoption == "off" then
 			HSTigerUse = 0
-			HSPrint("|cff008000HolyShift tiger's fury disabled. HSTigerUse = |cffffffff"..HSTigerUse)
+			HSPrint("|cffd08524HolyShift |cffffffffAuto Tiger's Fury |cffecd226Disabled. |cffd08524HSTigerUse = |cffffffff"..HSTigerUse)
 		end
 	elseif HScommand == "shift" then 
 		if HSoption == "on" then
 			HSShiftUse = 1
-			HSPrint('|cff008000HolyShift powershift enabled. HSShiftUse = |cffffffff'..HSShiftUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Powershift |cffecd226Enabled. |cffd08524HSShiftUse = |cffffffff'..HSShiftUse)
 		elseif HSoption == "off" then
 			HSShiftUse = 0
-			HSPrint('|cff008000HolyShift powershift disabled. HSShiftUse = |cffffffff'..HSShiftUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Powershift |cffecd226Disabled. |cffd08524HSShiftUse = |cffffffff'..HSShiftUse)
 		end
 	elseif HScommand == "cower" then 
 		if HSoption == "on" then
 			HSCowerUse = 1
-			HSPrint('|cff008000HolyShift auto cower enabled. HSCowerUse = |cffffffff'..HSCowerUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Cower |cffecd226Enabled. |cffd08524HSCowerUse = |cffffffff'..HSCowerUse)
 		elseif HSoption == "off" then
 			HSCowerUse = 0
-			HSPrint('|cff008000HolyShift auto cower disabled. HSCowerUse = |cffffffff'..HSCowerUse)
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Cower |cffecd226Disabled. |cffd08524HSCowerUse = |cffffffff'..HSCowerUse)
 		end
 	elseif HScommand == "deathrate" then 
 		if HSoption == "on" then
 			HSDeathrate = 1
-			HSPrint('|cff008000HolyShift deathrate report enabled. HSDeathrate = |cffffffff'..HSDeathrate)
+			HSPrint('|cffd08524HolyShift |cffffffffDeathrate Report |cffecd226Enabled. |cffd08524HSDeathrate = |cffffffff'..HSDeathrate)
 		elseif HSoption == "off" then
 			HSDeathrate = 0
-			HSPrint('|cff008000HolyShift deathrate report disabled. HSDeathrate = |cffffffff'..HSDeathrate)
+			HSPrint('|cffd08524HolyShift |cffffffffDeathrate Report |cffecd226Disabled. |cffd08524HSDeathrate = |cffffffff'..HSDeathrate)
 		end
-	elseif HScommand == "tone" then 
-		HSTrinketOne = HSoption
-		HSPrint('|cff008000HolyShift HSTrinketOne = |cffffffff'..HSTrinketOne)
-	elseif HScommand == "ttwo" then 
-		HSTrinketTwo = HSoption
-		HSPrint('|cff008000HolyShift HSTrinketTwo = |cffffffff'..HSTrinketTwo)
+	elseif HScommand == "ff" then 
+		if HSoption == "on" then
+			HSAutoFF = 1
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Faerie Fire |cffecd226Enabled. |cffd08524HSAutoFF = |cffffffff'..HSAutoFF)
+		elseif HSoption == "off" then
+			HSAutoFF = 0
+			HSPrint('|cffd08524HolyShift |cffffffffAuto Faerie Fire |cffecd226Disabled. |cffd08524HSAutoFF = |cffffffff'..HSAutoFF)
+		end
+	elseif HScommand == "weapon" then 
+		HSWeapon = HSoption
+		HSPrint('|cffd08524HolyShift HSWeapon = |cffecd226'..HSWeapon)
+	elseif HScommand == "offhand" then 
+		HSOffhand = HSoption
+		HSPrint('|cffd08524HolyShift HSOffhand = |cffecd226'..HSOffhand)
 	elseif HSCommand == nil or HSCommand == "" then
 		--HSPrint(HSCommand)
 		HSPrint("---------------------")
-		HSPrint("|cff008000HSInnervateUse = |cffffffff"..HSInnervateUse.."|cff008000. /hsdps innervate on or /hsdps innervate off to change")
-		HSPrint("|cff008000HSMCPUse = |cffffffff"..HSMCPUse.."|cff008000. /hsdps mcp on or /hsdps mcp off to change")
-		HSPrint("|cff008000HSMPUse = |cffffffff"..HSMPUse.."|cff008000. /hsdps manapot on or /hsdps manapot off to change")
-		HSPrint("|cff008000HSDRUse = |cffffffff"..HSDRUse.."|cff008000. /hsdps demonicrune on or /hsdps demonicrune off to change")
-		HSPrint("|cff008000HSFLUse = |cffffffff"..HSFLUse.."|cff008000. /hsdps flurry on or /hsdps flurry off to change")
-		HSPrint("|cff008000HSClawAdd = |cffffffff"..HSClawAdd.."|cff008000. /hsdps clawadds on or /hsdps clawadds off to change")
-		HSPrint("|cff008000HSTigerUse = |cffffffff"..HSTigerUse.."|cff008000. /hsdps tiger on or /hsdps tiger off to change")
-		HSPrint("|cff008000HSShiftUse = |cffffffff"..HSShiftUse.."|cff008000. /hsdps shift on or /hsdps shift off to change")
-		HSPrint("|cff008000HSCowerUse = |cffffffff"..HSCowerUse.."|cff008000. /hsdps cower on or /hsdps cower off to change")
-		HSPrint("|cff008000HSDeathrate = |cffffffff"..HSDeathrate.."|cff008000. /hsdps deathrate on or /hsdps deathrate off to change")
-		HSPrint("|cff008000HSTrinketOne = |cffffffff"..HSTrinketOne.."|cff008000. /hsdps tone 'Trinket Name' to change")
-		HSPrint("|cff008000HSTrinketTwo = |cffffffff"..HSTrinketTwo.."|cff008000. /hsdps ttwo 'Trinket Name' to change")
+		
+		if HSInnervateUse == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffInnervate |cff24D040Enabled|cffd08524.|cffecd226 /hsdps innervate on |cffd08524or|cffecd226 /hsdps innervate off |cffd08524to change')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffInnervate |cffD02424Disabled|cffd08524.|cffecd226 /hsdps innervate on |cffd08524or|cffecd226 /hsdps innervate off |cffd08524to change')
+		end
+		if HSMCPUse == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffManual Crowd Pummeler |cff24D040Enabled|cffd08524.|cffecd226 /hsdps mcp on |cffd08524or|cffecd226 /hsdps mcp off |cffd08524to change')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffManual Crowd Pummeler |cffD02424Disabled|cffd08524.|cffecd226 /hsdps mcp on |cffd08524or|cffecd226 /hsdps mcp off |cffd08524to change')
+		end
+		if HSMPUse == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffMana pot use |cff24D040Enabled|cffd08524.|cffecd226 /hsdps manapot on |cffd08524or|cffecd226 /hsdps manapot off |cffd08524to change')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffMana pot use |cffD02424Disabled|cffd08524.|cffecd226 /hsdps manapot on |cffd08524or|cffecd226 /hsdps manapot off |cffd08524to change')
+		end
+		if HSDRUse == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffDemonic rune use |cff24D040Enabled|cffd08524.|cffecd226 /hsdps demonicrune on |cffd08524or|cffecd226 /hsdps demonicrune off |cffd08524to change')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffDemonic rune use |cffD02424Disabled|cffd08524.|cffecd226 /hsdps demonicrune on |cffd08524or|cffecd226 /hsdps demonicrune off |cffd08524to change')
+		end
+		if HSFLUse == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffJuju flurry use |cff24D040Enabled|cffd08524.|cffecd226 /hsdps flurry on |cffd08524or|cffecd226 /hsdps flurry off to change')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffJuju flurry use |cffD02424Disabled|cffd08524.|cffecd226 /hsdps flurry on |cffd08524or|cffecd226 /hsdps flurry off to change')
+		end
+		if HSClawAdd == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffClaw non-bosses |cff24D040Enabled|cffd08524.|cffecd226 /hsdps clawadds on |cffd08524or|cffecd226 /hsdps clawadds off |cffd08524to change')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffClaw non-bosses |cffD02424Disabled|cffd08524.|cffecd226 /hsdps clawadds on |cffd08524or|cffecd226 /hsdps clawadds off |cffd08524to change')
+		end
+		if HSTigerUse == 1 then
+			HSPrint("|cffd08524HolyShift: |cffffffffTiger's Fury |cff24D040Enabled|cffd08524.|cffecd226 /hsdps tiger on |cffd08524or|cffecd226 /hsdps tiger off |cffd08524to change")
+		else
+			HSPrint("|cffd08524HolyShift: |cffffffffTiger's Fury |cffD02424Disabled|cffd08524.|cffecd226 /hsdps tiger on |cffd08524or|cffecd226 /hsdps tiger off |cffd08524to change")
+		end
+		if HSShiftUse == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffPowershift |cff24D040Enabled|cffd08524.|cffecd226 /hsdps shift on |cffd08524or|cffecd226 /hsdps shift off |cffd08524to change')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffPowershift |cffD02424Disabled|cffd08524.|cffecd226 /hsdps shift on |cffd08524or|cffecd226 /hsdps shift off |cffd08524to change')
+		end
+		if HSCowerUse == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffAuto Cower |cff24D040Enabled|cffd08524.|cffecd226 /hsdps cower on |cffd08524or|cffecd226 /hsdps cower off |cffd08524to change')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffAuto Cower |cffD02424Disabled|cffd08524.|cffecd226 /hsdps cower on |cffd08524or|cffecd226 /hsdps cower off |cffd08524to change')
+		end
+		if HSDeathrate == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffDeathrate report |cff24D040Enabled|cffd08524.|cffecd226 /hsdps deathrate on |cffd08524or|cffecd226 /hsdps deathrate off |cffd08524to change')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffDeathrate report |cffD02424Disabled|cffd08524.|cffecd226 /hsdps deathrate on |cffd08524or|cffecd226 /hsdps deathrate off |cffd08524to change')
+		end
+		if HSAutoFF == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffAuto Faerie Fire |cff24D040Enabled|cffd08524.|cffecd226 /hsdps ff on |cffd08524or|cffecd226 /hsdps ff off |cffd08524to change')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffAuto Faerie Fire |cffD02424Disabled|cffd08524.|cffecd226 /hsdps ff on |cffd08524or|cffecd226 /hsdps ff off |cffd08524to change')
+		end
+		if HSWeapon == nil then
+			HSPrint('|cffd08524HolyShift: |cffffffffWEAPON SWAP: |cffecd226No weapon assigned for HSWeapon|cffd08524.|cffecd226 /hsdps weapon Weapon Name |cffd08524to change or|cffecd226 /hsdps weapon none |cffd08524to disable')
+		elseif HSWeapon == 'none' or HSWeapon == 'None' then
+			HSPrint('|cffd08524HolyShift: |cffffffffWEAPON SWAP: HSWeapon = |cffD02424'..HSWeapon..'|cffd08524.|cffecd226 /hsdps weapon Weapon Name |cffd08524to change or|cffecd226 /hsdps weapon none |cffd08524to disable')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffWEAPON SWAP: HSWeapon = |cff24D040'..HSWeapon..'|cffd08524.|cffecd226 /hsdps weapon Weapon Name |cffd08524to change or|cffecd226 /hsdps weapon none |cffd08524to disable')
+		end
+		if HSOffhand == nil then
+			HSPrint('|cffd08524HolyShift: |cffffffffOFFHAND SWAP: |cffecd226No offhand assigned for HSOffhand|cffd08524.|cffecd226 /hsdps offhand Offhand Name |cffd08524to change or|cffecd226 /hsdps offhand none |cffd08524to disable')
+		elseif HSOffhand == 'none' or HSOffhand == 'None' then
+			HSPrint('|cffd08524HolyShift: |cffffffffOFFHAND SWAP: HSOffhand = |cffD02424'..HSOffhand..'|cffd08524.|cffecd226 /hsdps offhand Offhand Name |cffd08524to change or|cffecd226 /hsdps offhand none |cffd08524to disable')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffOFFHAND SWAP: HSOffhand = |cff24D040'..HSOffhand..'|cffd08524.|cffecd226 /hsdps offhand Offhand Name |cffd08524to change or|cffecd226 /hsdps offhand none |cffd08524to disable')
+		end
 	end
-	
-	--MPPrint("Disabled functions: class is not Warrior or 31 point talent not learned")
 end
 function HolyShift_OnEvent(event)
 	if event == "PLAYER_ENTERING_WORLD" then
@@ -173,8 +237,8 @@ function HolyShift_OnEvent(event)
 	end
 	
 	if event == "PLAYER_REGEN_ENABLED" then
-		if deathrateyn == 1 then
-			deathrate()
+		if HSDeathrate == 1 then
+			DeathRate()
 		end
 		--HSPrint("Leaving combat. doclaw = "..doclaw)
 		--combstarttime = 0
@@ -198,12 +262,9 @@ function HolyShift_OnEvent(event)
 	if event == "UI_ERROR_MESSAGE" then
 		if (strfind(arg1, "You must be")) then
 			doclaw = 1
-			--HSPrint("|cff008000Not behind the target, dummy---------------------")
 		end
 		if (strfind(arg1, "No charges remain")) then
-			swapoutmcp()
-			--doclaw = 1
-			--HSPrint("|cff008000Not behind the target, dummy---------------------")
+			SwapOutMCP(HSWeapon,HSOffhand)
 		end
 	end
 	if event == "CHAT_MSG_SPELL_SELF_DAMAGE" then
@@ -213,78 +274,85 @@ function HolyShift_OnEvent(event)
 			elseif doclaw == 2 then
 				doclaw = 0
 			end
-			--HSPrint("|cff008000You just clawed---------------------")
 		end
 		if (strfind(arg1, "Your Shred")) then
 			if doclaw ~= 0 then
 				doclaw = 0
 			end
-			--HSPrint("|cff008000You just Shredded---------------------")
 		end
 	end
 	
 	if event == "VARIABLES_LOADED" then
-		HSPrint('HolyShift Loaded')
-		
+		HSPrint('|cffd08524HolyShift by Maulbatross Loaded')
+		HSPrint('|cffd08524Type /hsdps to show options')
 		if HSInnervateUse == 1 then
-			HSPrint('|cff008000HolyShift: |cffffffffInnervate Enabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffInnervate |cff24D040Enabled')
 		else
-			HSPrint('|cff008000HolyShift: |cffffffffInnervate Disabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffInnervate |cffD02424Disabled')
 		end
 		if HSMCPUse == 1 then
-			HSPrint('|cff008000HolyShift: |cffffffffManual Crowd Pummeler Enabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffManual Crowd Pummeler |cff24D040Enabled')
 		else
-			HSPrint('|cff008000HolyShift: |cffffffffManual Crowd Pummeler Disabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffManual Crowd Pummeler |cffD02424Disabled')
 		end
 		if HSMPUse == 1 then
-			HSPrint('|cff008000HolyShift: |cffffffffMana pot use Enabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffMana pot use |cff24D040Enabled')
 		else
-			HSPrint('|cff008000HolyShift: |cffffffffMana pot use Disabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffMana pot use |cffD02424Disabled')
 		end
 		if HSDRUse == 1 then
-			HSPrint('|cff008000HolyShift: |cffffffffDemonic rune use Enabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffDemonic rune use |cff24D040Enabled')
 		else
-			HSPrint('|cff008000HolyShift: |cffffffffDemonic rune use Disabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffDemonic rune use |cffD02424Disabled')
 		end
 		if HSFLUse == 1 then
-			HSPrint('|cff008000HolyShift: |cffffffffJuju flurry use Enabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffJuju flurry use |cff24D040Enabled')
 		else
-			HSPrint('|cff008000HolyShift: |cffffffffJuju flurry use Disabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffJuju flurry use |cffD02424Disabled')
 		end
 		if HSClawAdd == 1 then
-			HSPrint('|cff008000HolyShift: |cffffffffClaw non-bosses Enabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffClaw non-bosses |cff24D040Enabled')
 		else
-			HSPrint('|cff008000HolyShift: |cffffffffClaw non-bosses Disabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffClaw non-bosses |cffD02424Disabled')
 		end
 		if HSTigerUse == 1 then
-			HSPrint("|cff008000HolyShift: |cffffffffTiger's Fury Enabled")
+			HSPrint("|cffd08524HolyShift: |cffffffffTiger's Fury |cff24D040Enabled")
 		else
-			HSPrint("|cff008000HolyShift: |cffffffffTiger's Fury Disabled")
+			HSPrint("|cffd08524HolyShift: |cffffffffTiger's Fury |cffD02424Disabled")
 		end
 		if HSShiftUse == 1 then
-			HSPrint('|cff008000HolyShift: |cffffffffPowershift Enabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffPowershift |cff24D040Enabled')
 		else
-			HSPrint('|cff008000HolyShift: |cffffffffPowershift Disabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffPowershift |cffD02424Disabled')
 		end
 		if HSCowerUse == 1 then
-			HSPrint('|cff008000HolyShift: |cffffffffAuto Cower Enabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffAuto Cower |cff24D040Enabled')
 		else
-			HSPrint('|cff008000HolyShift: |cffffffffAuto Cower Disabled')
-		end
-		if HSTrinketOne == nil then
-			HSPrint('|cff008000HolyShift: |cffffffffTRINKET SWAP: No trinket assigned for HSTrinketOne')
-		else
-			HSPrint('|cff008000HolyShift: |cffffffffTRINKET SWAP: TrinketOne = '..HSTrinketOne)
-		end
-		if HSTrinketTwo == nil then
-			HSPrint('|cff008000HolyShift: |cffffffffTRINKET SWAP: No trinket assigned for HSTrinketTwo')
-		else
-			HSPrint('|cff008000HolyShift: |cffffffffTRINKET SWAP: HSTrinketTwo = '..HSTrinketTwo)
+			HSPrint('|cffd08524HolyShift: |cffffffffAuto Cower |cffD02424Disabled')
 		end
 		if HSDeathrate == 1 then
-			HSPrint('|cff008000HolyShift: |cffffffffDeathrate report Enabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffDeathrate report |cff24D040Enabled')
 		else
-			HSPrint('|cff008000HolyShift: |cffffffffDeathrate report Disabled')
+			HSPrint('|cffd08524HolyShift: |cffffffffDeathrate report |cffD02424Disabled')
+		end
+		if HSAutoFF == 1 then
+			HSPrint('|cffd08524HolyShift: |cffffffffAuto Faerie Fire |cff24D040Enabled')
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffAuto Faerie Fire |cffD02424Disabled')
+		end
+		if HSWeapon == nil then
+			HSPrint('|cffd08524HolyShift: |cffffffffWEAPON SWAP: |cffecd226No weapon assigned for HSWeapon')
+		elseif HSWeapon == 'none' or HSWeapon == 'None' then
+			HSPrint('|cffd08524HolyShift: |cffffffffWEAPON SWAP: HSWeapon = |cffD02424'..HSWeapon)
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffWEAPON SWAP: HSWeapon = |cff24D040'..HSWeapon)
+		end
+		if HSOffhand == nil then
+			HSPrint('|cffd08524HolyShift: |cffffffffOFFHAND SWAP: |cffecd226No offhand assigned for HSOffhand')
+		elseif HSOffhand == 'none' or HSOffhand == 'None' then
+			HSPrint('|cffd08524HolyShift: |cffffffffOFFHAND SWAP: HSOffhand = |cffD02424'..HSOffhand)
+		else
+			HSPrint('|cffd08524HolyShift: |cffffffffOFFHAND SWAP: HSOffhand = |cff24D040'..HSOffhand)
 		end
 		
 		if UnitClass("player") == "Druid" then
@@ -333,11 +401,21 @@ function HolyShift_OnEvent(event)
             else
                 tonumber(HSCowerUse)
             end
-			if HSTrinketOne == nil then
-                HSTrinketOne = 'None'
+			if HSWeapon == nil then
+                HSWeapon = 'None'
             end
-			if HSTrinketTwo == nil then
-                HSTrinketTwo = 'None'
+			if HSOffhand == nil then
+                HSOffhand = 'None'
+            end
+			if HSDeathrate == nil then
+                HSDeathrate = 0
+            else
+                tonumber(HSDeathrate)
+            end
+			if HSAutoFF == nil then
+                HSAutoFF = 0
+            else
+                tonumber(HSAutoFF)
             end
 		end
 	end
@@ -351,7 +429,7 @@ end
 function EShift()
     local a,c=GetActiveForm()
     if(a==0) then
-        CastShapeshiftForm(c) --Innervate put cat form on gcd so shift doesnt happen
+        CastShapeshiftForm(c)
     elseif(not IsSpellOnCD('Cat Form')) then
         CastShapeshiftForm(a)
         ToggleAutoAttack("off")
@@ -360,7 +438,7 @@ end
 function QuickShift()
     local a,c=GetActiveForm()
     if(a==0) then
-        CastShapeshiftForm(c) --Innervate put cat form on gcd so shift doesnt happen
+        CastShapeshiftForm(c)
     else
         CastShapeshiftForm(a)
         ToggleAutoAttack("off")
@@ -368,138 +446,101 @@ function QuickShift()
 end
 function ToggleAutoAttack(switch)
     if(switch == "off") then
-        if(findAttackActionSlot() ~= 0) then
+        if(FindAttackActionSlot() ~= 0) then
             AttackTarget()
         end
     elseif(switch == "on") then
-        if(findAttackActionSlot() == 0) then
+        if(FindAttackActionSlot() == 0) then
             AttackTarget()
         end
     end
 end
-function HolyShiftAddon(nervyn,mcpuse,mpuse,druse,fluse,clawad,tfuse,shiftuse,coweruse,tswapone,tswaptwo,deathrateon)
-uac=UnitAffectingCombat
-uibn=UseItemByName
-giil=GetInventoryItemLink
-giicd=GetInventoryItemCooldown
-u=UnitMana('Player')
-c=CastSpellByName
-f=UnitPowerType("Player")
-p=GetComboPoints("unit","target")
-tot,rot=UnitName("targettarget")
-romyn = HSBuffChk("INV_Misc_Rune")
-stealthyn = HSBuffChk("Ability_Ambush")
-shredtext = "Spell_Shadow_VampiricAura"
-clawtext = "Ability_Druid_Rake"
-partynum = GetNumPartyMembers()
-romcd,romeq,rombag,romslot = ItemInfo('Rune of Metamorphosis')
-kotscd,kotseq,kotsbag,kotsslot = ItemInfo('Kiss of the Spider')
-gcloakcd,gcloakeq,gcdevbag,gcdevslot = ItemInfo('Gnomish Cloaking Device')
-escd,eseq,esbag,esslot = ItemInfo('Earthstrike')
-playername,_ = UnitName('player')
-clawab = "Claw"
-shredab = "Shred"
-currentMana, maxMana = LunaUF.DruidManaLib:GetMana()
-local flcd,_,flbag,flslot = ItemInfo('Juju Flurry')
-local lipcd,_,lipbag,lipslot = ItemInfo('Limited Invulnerability Potion')
-nervst, nervdur,_ = GetSpellCooldown(GetSpellID('Innervate'), "spell")
-nervcd = nervdur - (GetTime() - nervst)
-ferocity = SpecCheck(2,1)
-impshred = SpecCheck(2,9)
-natshapeshiftr = SpecCheck(1,7)
-shth = 15
-copobu = 100 - (40 + impshred*6 + 20)
-idolofferocity = 0
-nervuse = nervyn
-pummelyn = mcpuse
-dryn = druse
-flyn = fluse
-mpyn = mpuse
-shiftyn = shiftuse
-tfyn = tfuse
-clawyn = clawad
-coweryn = coweruse
-trinketone = tswapone
-trinkettwo = tswaptwo
-deathrateyn = deathrateon
---trinketswap(trinketone,trinkettwo)
-if(string.find(giil('player',18), 'Idol of Ferocity')) then
-	idolofferocity = 3
-end
-if uac('player') and deathrateyn == 1 then --and UnitLevel('target') == -1 then
-	deathrate()
-end
-	if(romyn == true) then
-		shth = 30
+function HolyShiftAddon()
+	local tot,rot=UnitName("targettarget")
+	local romactive = HSBuffChk("INV_Misc_Rune")
+	local stealthed = HSBuffChk("Ability_Ambush")
+	local partynum = GetNumPartyMembers()
+	local romcooldown,romeq,rombag,romslot = ItemInfo('Rune of Metamorphosis')
+	local jgcd,jgeq,jgbag,jgslot = ItemInfo('Jom Gabbar')
+	local clawab = "Claw"
+	local shredab = "Shred"
+	local flcd,_,flbag,flslot = ItemInfo('Juju Flurry')
+	local lipcd,_,lipbag,lipslot = ItemInfo('Limited Invulnerability Potion')
+	local natshapeshiftr = SpecCheck(1,7)
+	if UnitAffectingCombat('player') and HSDeathrate == 1 then
+		DeathRate()
 	end
-	if(f==3) then --and (gcloakeq == 0 and gcloakcd ~= 0 and HSBuffChk("Spell_Nature_Invisibilty") == false) then
-		if stealthyn == true then
+	if UnitPowerType("Player") == 3 then
+		if stealthed == true then
 			if HSBuffChk('Ability_Mount_JungleTiger') == false then
 				CastSpellByName("Tiger's Fury(Rank 4)")
 			end
 			if CheckInteractDistance('target',3) == 1 then
-				cast("Ravage")
+				CastSpellByName("Ravage")
 			end
 		else
-			if tot == playername then --or (UnitLevel('target') ~= -1 and clawyn == 1) then
+			if tot == playername then
 				if UnitLevel('target') == -1 then --If target is a boss then shift out so you can LIP
 					if lipcd == 0 and lipslot ~= 0 then
 						EShift()
 					elseif(not IsSpellOnCD("Cower")) then
-						c"Cower"
+						CastSpellByName("Cower")
 					elseif(not IsSpellOnCD("Barkskin")) then
 						EShift()
 					else
-						Atk(clawab,pummelyn)
+						Atk(clawab,stealthed,romactive,romcooldown)
 					end
 				else --Else if target is not a boss
 					if partynum > 2 then
-						if(not IsSpellOnCD("Cower")) and coweryn == 1 then
-							c"Cower"
+						if(not IsSpellOnCD("Cower")) and HSCowerUse == 1 then
+							CastSpellByName("Cower")
 						else
-							Atk(clawab,pummelyn)
+							Atk(clawab,stealthed,romactive,romcooldown)
 						end
 					else
-						Atk(clawab,pummelyn)
+						Atk(clawab,stealthed,romactive,romcooldown)
 					end
 				end
 			else
-				if clawyn == 1 then
-					Atk(clawab,pummelyn)
+				if HSClawAdd == 1 then
+					Atk(clawab,stealthed,romactive,romcooldown)
 				else
 					if doclaw == 0 then 
-						Atk(shredab,pummelyn)
+						Atk(shredab,stealthed,romactive,romcooldown)
 					elseif doclaw == 1 then
-						Atk(clawab,pummelyn)
+						Atk(clawab,stealthed,romactive,romcooldown)
 					elseif doclaw == 2 then
-						Atk(clawab,pummelyn)
+						Atk(clawab,stealthed,romactive,romcooldown)
 					end
 				end
 			end
 		end
 	else
 		if UnitLevel('target') == -1
-		and uac('Player')
+		and UnitAffectingCombat('Player')
 		and UnitInRaid('Player') then
 			if tot == playername then
 				if UnitName('target') ~= "Eye of C'Thun" 
 				and UnitName('target') ~= "Anub'Rekhan" then
 					if lipcd == 0 and lipslot ~= 0 then
-						uibn("Limited Invulnerability Potion")
+						UseItemByName("Limited Invulnerability Potion")
 					elseif(not IsSpellOnCD("Barkskin")) then
-						c"Barkskin"
+						CastSpellByName("Barkskin")
 					end
 				end
 			else
 				if UnitHealth('target') > 10 then
-					Restore(romeq,romcd,nervuse)
+					Restore(romeq,romactive,romcooldown)
 				end
 			end
-			if flcd == 0 and flyn == 1 and CheckInteractDistance('target',3) == 1 then
+			if flcd == 0 and HSFLUse == 1 and CheckInteractDistance('target',3) == 1 then
 				UseContainerItem(flbag, flslot)
 				if SpellIsTargeting() then
 					SpellTargetUnit("player")
 				end
+			end
+			if UnitAffectingCombat('Player') and jgeq ~= -1 and jgcd == 0 and UnitName('target') ~= "Razorgore the Untamed" and CheckInteractDistance('target',3) == 1 then
+				UseItemByName("Jom Gabbar")
 			end
 			if UnitName('target') == 'Chromaggus' then BrzRmv() end
 		end
@@ -508,13 +549,26 @@ end
 		end
 	end
 end
-function Atk(CorS,pummelz)
-	--StAttack()
+function Atk(CorS,stealthyn,romyn,romcd)
+	StAttack(1)
 	local abiltext = nil
+	local ferocity = SpecCheck(2,1)
+	local idolofferocity = 0
+	local shth = 15
+	local impshred = SpecCheck(2,9)
+	local copobu = 100 - (40 + impshred*6 + 20)
+	local currentMana, maxMana = LunaUF.DruidManaLib:GetMana()
+	local shredtext = "Spell_Shadow_VampiricAura"
+	local clawtext = "Ability_Druid_Rake"
+	local kotscd,kotseq,kotsbag,kotsslot = ItemInfo('Kiss of the Spider')
+	local escd,eseq,esbag,esslot = ItemInfo('Earthstrike')
+	local zhmcd,zhmeq,zhmbag,zhmslot = ItemInfo('Zandalarian Hero Medallion')
 	local fbthresh = 5
-	local manathresh = 90
-	if UnitName('target') == 'Loatheb' then
-		manathresh = 900
+	if(romyn == true) then
+		shth = 30
+	end
+	if(string.find(GetInventoryItemLink('player',18), 'Idol of Ferocity')) then
+		idolofferocity = 3
 	end
 	if UnitLevel('target') ~= -1 then
 		if UnitLevel('target') > 60 then
@@ -540,31 +594,21 @@ function Atk(CorS,pummelz)
 		end
 	else
 		PopSkeleton()
-		if pummelz == 1 then 
-			pummel() 
+		if HSMCPUse == 1 then 
+			Pummel() 
 		end
-		if uac('Player') and kotseq ~= -1 and kotscd == 0 and UnitName('target') ~= "Razorgore the Untamed" and CheckInteractDistance('target',3) == 1 then
-			uibn("Kiss of the Spider")
+		if UnitAffectingCombat('Player') and kotseq ~= -1 and kotscd == 0 and UnitName('target') ~= "Razorgore the Untamed" and CheckInteractDistance('target',3) == 1 then
+			UseItemByName("Kiss of the Spider")
 		end 
-		if uac('Player') and eseq ~= -1 and escd == 0 and UnitName('target') ~= "Razorgore the Untamed" and CheckInteractDistance('target',3) == 1 then
-			uibn("Earthstrike")
+		if UnitAffectingCombat('Player') and eseq ~= -1 and escd == 0 and UnitName('target') ~= "Razorgore the Untamed" and CheckInteractDistance('target',3) == 1 then
+			UseItemByName("Earthstrike")
 		end
-		--[[if trinketone ~= nil and trinkettwo ~= nil and trinketone ~= "none" and trinkettwo ~= "none" and gcloakeq ~= 0 then
-			if --[[uac('Player') and eseq ~= 0 and]] escd < 100 and escd ~= 0 then
-				--HSPrint(escd)
-				--HSPrint(eseq)
-				trinketswap(trinketone,trinkettwo)
-			elseif HSBuffChk('Spell_Nature_Invisibilty') == true and gcloakcd > 30 then
-				trinketswap(trinketone,trinkettwo)
-			end
-			if --[[uac('Player') and]] romeq ~= 0 and romcd < 100 and romcd ~= 0 then
-				--trinketswap(trinketone,trinkettwo)
-			end
-		end]]
+		if UnitAffectingCombat('Player') and zhmeq ~= -1 and zhmcd == 0 and UnitName('target') ~= "Razorgore the Untamed" and CheckInteractDistance('target',3) == 1 then
+			UseItemByName("Zandalarian Hero Medallion")
+		end
 	end
-	if UnitIsDead('target') then --and doclaw ~= 0 then
+	if UnitIsDead('target') then
 		doclaw = 0
-		--HSPrint("Target dead. Doclaw = "..doclaw.."------------------")
 	end
 	if CorS == "Claw" then
 		abiltext = clawtext
@@ -572,110 +616,126 @@ function Atk(CorS,pummelz)
 	elseif CorS == "Shred" then
 		abiltext = shredtext
 	end
-	-------------------------------------------------
-	--[[if HSBuffChk("Spell_Nature_Invisibilty") == true and gcloakeq ~= 0 and gcloakcd > 3598 then
-		StAttack(0)
-		HSPrint(gcloakcd)
-		HSPrint('Attempting trinket swap')
-	else]]
-		--HSPrint(copobu)
-		StAttack(1)
 
-		if CheckInteractDistance('target',3) ~= 1 then
-			if isTDebuff('target', 'Spell_Nature_FaerieFire') == false and stealthyn == false then
-				CastSpellByName("Faerie Fire (Feral)(Rank 4)")
-			end
-			if HSBuffChk('Ability_Mount_JungleTiger') == false and u >= copobu + 30 and tfyn == 1 then
-				CastSpellByName("Tiger's Fury(Rank 4)")
-			end
+	if CheckInteractDistance('target',3) ~= 1 then
+		if IsTDebuff('target', 'Spell_Nature_FaerieFire') == false and stealthyn == false then
+			CastSpellByName("Faerie Fire (Feral)(Rank 4)")
 		end
-		if (HSBuffChk("Spell_Shadow_ManaBurn") == false) then
-			if(p<fbthresh) then
-				if u>=copobu then
-					if isuse(FindActionSlot(abiltext)) == 1 then
-						if not IsSpellOnCD(CorS) then
-							cast(CorS)
-							--HSPrint(doclaw)
-						end
-					end
-				else
-					if uac('Player') and UnitExists("target") then
-						if isTDebuff('target', 'Spell_Nature_FaerieFire') == false and stealthyn == false and not IsSpellOnCD("Faerie Fire (Feral)") then
-							CastSpellByName("Faerie Fire (Feral)(Rank 4)")
-						end
-						if (currentMana >= manathresh or romyn == true and romcd > 282) and shiftyn == 1 then
-							if not(HSBuffChk("Spell_Nature_Invisibilty") == true and gcloakeq ~= -1 and gcloakcd > 3598) then--<<<----------------
-								EShift()
-							end
-						end
+		if HSBuffChk('Ability_Mount_JungleTiger') == false and UnitMana('Player') >= copobu + 30 and HSTigerUse == 1 then
+			CastSpellByName("Tiger's Fury(Rank 4)")
+		end
+	end
+	if (HSBuffChk("Spell_Shadow_ManaBurn") == false) then
+		if(GetComboPoints("unit","target")<fbthresh) then
+			if UnitMana('Player')>=copobu then
+				if IsUse(FindActionSlot(abiltext)) == 1 then
+					if not IsSpellOnCD(CorS) then
+						CastSpellByName(CorS)
+						--HSPrint(doclaw)
 					end
 				end
 			else
-				if u>=shth then
-					if isuse(FindActionSlot("Ability_Druid_FerociousBite")) == 1 then
-						if not IsSpellOnCD("Ferocious Bite") then
-							c"Ferocious Bite"
-						end
+				if UnitAffectingCombat('Player') and UnitExists("target") then
+					if IsTDebuff('target', 'Spell_Nature_FaerieFire') == false and stealthyn == false and (not IsSpellOnCD("Faerie Fire (Feral)")) and HSAutoFF == 1 then
+						CastSpellByName("Faerie Fire (Feral)(Rank 4)")
 					end
-				else
-					if uac('Player') and UnitExists("target") then
-						if isTDebuff('target', 'Spell_Nature_FaerieFire') == false and stealthyn == false and not IsSpellOnCD("Faerie Fire (Feral)") then
-							CastSpellByName("Faerie Fire (Feral)(Rank 4)")
-						end
-						if (currentMana >= manathresh or romyn == true and romcd > 282) and shiftyn == 1 then
-							if not(HSBuffChk("Spell_Nature_Invisibilty") == true and gcloakeq ~= -1 and gcloakcd > 3598) then--<<<----------------
-								EShift()
-							end
-						end
+					
+					if CanShift() == true then
+						EShift()
 					end
 				end
 			end
-		elseif (not IsSpellOnCD(CorS)) then
-			cast(CorS)
+		else
+			if UnitMana('Player')>=shth then
+				if IsUse(FindActionSlot("Ability_Druid_FerociousBite")) == 1 then
+					if not IsSpellOnCD("Ferocious Bite") then
+						CastSpellByName("Ferocious Bite")
+					end
+				end
+			else
+				if UnitAffectingCombat('Player') and UnitExists("target") then
+					if IsTDebuff('target', 'Spell_Nature_FaerieFire') == false and stealthyn == false and (not IsSpellOnCD("Faerie Fire (Feral)")) and HSAutoFF == 1 then
+						CastSpellByName("Faerie Fire (Feral)(Rank 4)")
+					end
+					if CanShift() == true then
+						EShift()
+					end
+				end
+			end
 		end
-	--end
-	-------------------------
+	elseif (not IsSpellOnCD(CorS)) then
+		CastSpellByName(CorS)
+	end
 end
-function Restore(rom,romcd,nervyn)
+function CanShift()
+	local canshift = false
+	local currentMana, maxMana = LunaUF.DruidManaLib:GetMana()
+	local manathreshold = 90
+	local mpcd,_,mpbag,mpslot = ItemInfo('Major Mana Potion')
+	local smcd,_,smbag,smslot = ItemInfo('Superior Mana Potion')
+	local drcd,_,drbag,drslot = ItemInfo('Demonic Rune')
+	local nervst, nervdur,_ = GetSpellCooldown(GetSpellID('Innervate'), "spell")
+	local nervcd = nervdur - (GetTime() - nervst)
+	local romcooldown,romeq,rombag,romslot = ItemInfo('Rune of Metamorphosis')
+	local romactive = HSBuffChk("INV_Misc_Rune")
+	if UnitName('target') == 'Loatheb' then
+		manathreshold = 900
+	end
+	if (currentMana >= manathreshold 
+	or (romcooldown == 0 and romeq ~= -1)
+	or (romactive == true and romcooldown > 282)
+	or mpcd == 0
+	or drcd == 0) 
+	and HSShiftUse == 1 then
+		canshift = true
+	end
+	
+	return canshift
+end
+function Restore(rom,romyn,romcd)
 	local resto = 1500
 	local hthresh = 5
 	local mpcd,_,mpbag,mpslot = ItemInfo('Major Mana Potion')
 	local smcd,_,smbag,smslot = ItemInfo('Superior Mana Potion')
 	local drcd,_,drbag,drslot = ItemInfo('Demonic Rune')
 	local hscd,_,hsbag,hsslot = ItemInfo('Major Healthstone')
+	local nervst, nervdur,_ = GetSpellCooldown(GetSpellID('Innervate'), "spell")
+	local nervcd = nervdur - (GetTime() - nervst)
 	local mpot = mpslot + smslot
 	local curhp = Num_Round((UnitHealth('player')/UnitHealthMax('player')),2)
 	if curhp < 0.4 and hsslot ~= 0 and hscd == 0 then
-		uibn("Major Healthstone")
+		UseItemByName("Major Healthstone")
 	end
 	if HSBuffChk("INV_Potion_97") == true  then
 		resto = 2800
 		hthresh = 1
 	end
 	if UnitHealth('target') > hthresh then
-		if u<resto then
-			if(not IsSpellOnCD("Innervate")) and nervyn == 1 then
-				c("Innervate",1)
+		if UnitMana('Player')<resto then
+			if(not IsSpellOnCD("Innervate")) and HSInnervateUse == 1 then
+				CastSpellByName("Innervate",1)
 			elseif HSBuffChk("Spell_Nature_Lightning") == false and nervcd < 340 and romyn == false then
 				if rom ~= -1 and romcd == 0 then
 					if CheckInteractDistance('target',3) == 1 then
-						uibn("Rune of Metamorphosis")
+						UseItemByName("Rune of Metamorphosis")
 					end
 				else
-					if (mpcd == 0 or smcd == 0) and (drcd == 0 or drcd == -1) and mpot ~= 0 and mpyn == 1 then
+					if (mpcd == 0 or smcd == 0) and (drcd == 0 or drcd == -1) and mpot ~= 0 and HSMPUse == 1 then
 						if mpslot ~= 0 then
-							uibn("Major Mana Potion")
+							UseItemByName("Major Mana Potion")
 						else
-							uibn("Superior Mana Potion")
+							UseItemByName("Superior Mana Potion")
 						end
 					else
-						if (mpcd > 0 or smcd > 0 or mpcd == -1 or smcd == -1) and drcd == 0 and drslot ~= 0 and dryn == 1 and UnitHealth('player') > 1000 then
-							uibn("Demonic Rune")
-						elseif (drcd > 0 or drcd == -1) and (mpcd == 0 or smcd == 0) and mpot ~= 0 and mpyn == 1 then
+						--HSPrint('1 attempting to use demonic rune')
+						if (mpcd > 0 or smcd > 0 or mpot == 0 or mpcd == -1 or smcd == -1) and drcd == 0 and drslot ~= 0 and HSDRUse == 1 and UnitHealth('player') > 1000 then
+							--HSPrint('2 attempting to use demonic rune')
+							UseItemByName("Demonic Rune")
+						elseif (drcd > 0 or drcd == -1) and (mpcd == 0 or smcd == 0) and mpot ~= 0 and HSMPUse == 1 then
 							if mpslot ~= 0 then
-								uibn("Major Mana Potion")
+								UseItemByName("Major Mana Potion")
 							else
-								uibn("Superior Mana Potion")
+								UseItemByName("Superior Mana Potion")
 							end
 						end
 					end
@@ -686,7 +746,7 @@ function Restore(rom,romcd,nervyn)
 end
 function ItemInfo(iname)
 	local ItemEquip = -1
-	local ItemCdr = 0
+	local ItemCdr = -1
 	local ContainerBag = nil
 	local ContainerSlot = nil
 	for slot = 0, 19 do --Check player paper doll slots.
@@ -716,12 +776,13 @@ function ItemInfo(iname)
 	if ItemEquip ~= -1 then --item is equipped
 		icdstart,icddur,_ = GetInventoryItemCooldown('player',ItemEquip)
 		ItemCdr = Num_Round(icddur - (GetTime() - icdstart),2)
+		if ItemCdr < 0 then ItemCdr = 0 end
 	elseif ContainerSlot ~= 0 then -- Item is in container slot
 		icdstart, icddur,_ = GetContainerItemCooldown(ContainerBag, ContainerSlot)
 		ItemCdr = Num_Round(icddur - (GetTime() - icdstart),2)
+		if ItemCdr < 0 then ItemCdr = 0 end
 	end
 	
-	if ItemCdr < 0 then ItemCdr = 0 end
 	return ItemCdr,ItemEquip,ContainerBag,ContainerSlot
 end
 function HSBuffChk(texture)
@@ -765,32 +826,13 @@ function GetActiveForm()
     end
     return formId, catId
 end
-function findAttackActionSlot()
+function FindAttackActionSlot()
     for i = 1, 120, 1
         do
         if(IsAttackAction(i) == 1 and IsCurrentAction(i) == 1) then
         return i end
     end
     return 0
-end
-function CheckInv(itemName)
-	local id1 = nil
-	local id2 = nil
-	for bag = 0, 4, 1 do
-		for slot = 1, GetContainerNumSlots(bag), 1 do
-			local name = GetContainerItemLink(bag,slot)
-			if name then
-				if string.find(name, itemName) then
-					id1 = bag
-					id2 = slot
-					break
-				end
-			end
-		end
-	end
-	if id1 == nil then id1 = 0 end
-	if id2 == nil then id2 = 0 end
-	return id1, id2
 end
 function FindActionSlot(spellTexture)	
 	for i = 1, 120, 1
@@ -800,73 +842,36 @@ function FindActionSlot(spellTexture)
 	end
 	return 0
 end
-function isuse(abil)
+function IsUse(abil)
 	isUsable, notEnoughMana = IsUsableAction(abil)
 	if isUsable == nil then
 		isUsable = 0
 	end
 	return isUsable
 end
-function trinketswap(trinket1,trinket2) --Only sort of works
-	if trinket1 == nil or trinket2 == nil then return end
-	local secondtrinkloc = 0
-	local gnomecloakcd,gnomecloakeq,gnomecloakbag,gnomecloakslot = ItemInfo('Gnomish Cloaking Device')
-	if gnomecloakeq == 13 then
-		secondtrinkloc = 14
-	else
-		secondtrinkloc = 13
-	end
-	local t1cd,t1eq,t1bag,t1slot = ItemInfo(trinket1)
-	local t2cd,t2eq,t2bag,t2slot = ItemInfo(trinket2)
-	if uac('Player') and gnomecloakeq ~= -1 and gnomecloakcd == 0 then
-		UseItemByName('Gnomish Cloaking Device')
-		ToggleAutoAttack("off")
-	end
-	if HSBuffChk("Spell_Nature_Invisibilty") and gnomecloakeq ~= -1 and gnomecloakcd > 30  then
-		--[[if eseq ~= 0 and escd > 30 then
-			PickupInventoryItem(secondtrinkloc)
-			PickupContainerItem(t1bag,t1slot)
-		elseif romeq ~= 0 and romcd > 30 then
-			PickupInventoryItem(secondtrinkloc)
-			PickupContainerItem(t1bag,t1slot)
-		else]]
-		if(string.find(giil('player',gnomecloakeq), 'Gnomish Cloaking Device')) then --and (string.find(giil('player',secondtrinkloc), trinket1) == false)then
-		--if HSBuffChk('Ambush') == false then
-			--CastSpellByName('Prowl')
-		--end
-			PickupInventoryItem(secondtrinkloc)
-			PickupContainerItem(t1bag,t1slot)
-		end
-		if(string.find(giil('player',secondtrinkloc), trinket1)) then
-			
-			PickupInventoryItem(gnomecloakeq)
-			PickupContainerItem(t2bag,t2slot)
-		end
-	end
-end
 function PopSkeleton()
-	local tloc = giil("player", 17)
-	local tokcd,tokeq,tokbag,tokslot = ItemInfo('Tome of Knowledge')
+	local ohloc = GetInventoryItemLink("player", 17)
+	local ohcd,oheq,ohbag,ohslot = ItemInfo(HSOffhand)
 	local offhand = 'Ancient Cornerstone Grimoire'
-	if tloc ~= nil then
-		if(string.find(tloc, offhand)) then
+	if ohloc ~= nil then
+		if(string.find(ohloc, offhand)) then
 			local acgcdr,acgeq,acgbag,acgslot = ItemInfo(offhand)
 			if acgcdr == 0 and CheckInteractDistance('target',3) == 1 then
 				UseItemByName('Ancient Cornerstone Grimoire')
-			elseif acgcdr > 30 then
+			elseif acgcdr > 30 and HSOffhand ~= 'Ancient Cornerstone Grimoire' then
 				PickupInventoryItem('17')
-				PickupContainerItem(tokbag,tokslot)
+				PickupContainerItem(ohbag,ohslot)
 			end
 		end
 	end
 end
-function pummel()
-	local tloc = giil("player", 16)
+function Pummel()
+	local tloc = GetInventoryItemLink("player", 16)
 	local wep = 'Manual Crowd Pummeler'
 	local cd,t = 30, GetTime()
 	if tloc ~= nil then
 		if(string.find(tloc, wep)) then
-			local mcpstart, mcpdur, _ = giicd("player", 16)
+			local mcpstart, mcpdur, _ = GetInventoryItemCooldown("player", 16)
 			local mcpcdr = mcpdur - (GetTime() - mcpstart)
 			if mcpcdr < 0 then mcpcdr = 0 end
 			if mcpcdr == 0 then
@@ -878,18 +883,20 @@ function pummel()
 		end
 	end
 end
-function swapoutmcp()
-	local tloc = GetInventoryItemLink("player", 16)
+function SwapOutMCP(weapon,offhand)
+	local weploc = GetInventoryItemLink("player", 16)
 	local wep = 'Manual Crowd Pummeler'
-	local bqwhcd,bqwheq,bqwhbag,bqwhslot = ItemInfo('Blessed Qiraji War Hammer')
-	local tokcd,tokeq,tokbag,tokslot = ItemInfo('Tome of Knowledge')
-	if tloc ~= nil then
-		if(string.find(tloc, wep)) then
+	local wepcd,wepeq,wepbag,wepslot = ItemInfo(weapon)
+	local tokcd,tokeq,tokbag,tokslot = ItemInfo(offhand)
+	if weploc ~= nil and weapon ~= "none" and weapon ~= "None" then
+		if(string.find(weploc, wep)) then
 			PickupInventoryItem('16')
-			PickupContainerItem(bqwhbag,bqwhslot)
+			PickupContainerItem(wepbag,wepslot)
 		end
 	end
-	UseItemByName('Tome of Knowledge')
+	if offhand ~= "none" and offhand ~= "None" and weapon ~= "none" and weapon ~= "None" then
+		UseItemByName(offhand)
+	end
 end
 function BrzRmv()
 	local debuff = "Bronze"
@@ -912,7 +919,7 @@ function StAttack(switch)
 		end
 	end
 end
-function isTDebuff(target, debuff)
+function IsTDebuff(target, debuff)
     local isDebuff = false
     for i = 1, 40 do
         if(strfind(tostring(UnitDebuff(target,i)), debuff)) then 
@@ -921,7 +928,7 @@ function isTDebuff(target, debuff)
     end
     return isDebuff
 end
-function deathrate()
+function DeathRate()
 	local totalaverage = 0
 	local mobhealth = nil
 	local fightlength = 0
@@ -963,7 +970,7 @@ function deathrate()
 				HSPrint('Seconds in combat: '..Num_Round(curtime,2))
 				HSPrint('Mob death rate is: '..totalaverage..'% per second')
 			end
-			if uac('player') then
+			if UnitAffectingCombat('player') then
 				if UnitInRaid('player') then
 					if UnitLevel('target') == -1 then
 						SendChatMessage('Mob health is: '..mobhealth, "RAID")
@@ -987,8 +994,13 @@ function SpecCheck(page,spellnum)
         return nil;
     end
 end
---------------------------------------------AUTO BUFF---------------------------------------------------
+function HelmCheck()
+	local _,whheq,whhbag,whhslot = ItemInfo('Wolfshead Helm')
+	HSPrint(whheq)
+end
+--------------------------------------------MISC Feral Macros. Call with /run 'function name'---------------
 function AutoBuff()
+	local _,whheq,whhbag,whhslot = ItemInfo('Wolfshead Helm')
 	local cd,t = 1.5, GetTime()
 	local mongcd,_,mongbag,mongslot = ItemInfo('Elixir of the Mongoose')
 	local fortcd,_,fortbag,fortslot = ItemInfo('Elixir of Fortitude')
@@ -1017,16 +1029,16 @@ function AutoBuff()
 			CastSpellByName('Mark of the Wild',1)
 		elseif HSBuffChk('Spell_Nature_CrystalBall') == false and omenofclarity == 1 then
 			CastSpellByName('Omen of Clarity')
-		elseif HSBuffChk('Thorns') == false then
+		elseif HSBuffChk('Thorns') == false and whheq ~= 1 then
 			CastSpellByName('Thorns',1)
 		end
 	end
 	if UnitInRaid('player') then
 		if HSBuffChk('Potion_32') == false and mongslot ~= 0 then
 			UseContainerItem(mongbag, mongslot)
-		--elseif HSBuffChk('Potion_44') == false and fortslot ~= 0 then
-			--UseContainerItem(fortbag, fortslot)
-		elseif HSBuffChk('Potion_86') == false and supdslot ~= 0 then
+		elseif HSBuffChk('Potion_44') == false and fortslot ~= 0 and whheq ~= 1 then
+			UseContainerItem(fortbag, fortslot)
+		elseif HSBuffChk('Potion_86') == false and supdslot ~= 0 and whheq ~= 1 then
 			UseContainerItem(supdbag, supdslot)
 		elseif HSBuffChk('MonsterScales_11') == false and HSBuffChk('Potion_61') == false and strbuff ~= 0 then
 			if jjpslot ~= 0 then
@@ -1094,27 +1106,6 @@ function AutoBuff()
 		end
 	end
 end
---------------------------------------------AUTO BUFF END---------------------------------------------------
---------------------------------------------MISC Feral Macros. Call with /run 'function name'---------------
-function pummeler()
-    local tloc = GetInventoryItemLink("player", 16)
-    local wep = 'Manual Crowd Pummeler'
-    local cd,t = 30, GetTime()
-    if tloc ~= nil then
-        if(string.find(tloc, wep)) then
-            local mcpstart, mcpdur, _ = GetInventoryItemCooldown("player", 16)
-            local mcpcdr = mcpdur - (GetTime() - mcpstart)
-            if mcpcdr < 0 then mcpcdr = 0 end
-            if mcpcdr == 0 then
-                if t-cd >= (TSSW or 0) and CheckInteractDistance('target',3) == 1 then 
-                    TSSW = t
-                    UseItemByName('Manual Crowd Pummeler')
-                end
-            end
-        end
-    end
-end
---------------------------------------------------------
 function StealthOne()
 	local cd,t = 3, GetTime()
 	if t-cd >= (prowlwait or 0) then
@@ -1186,7 +1177,7 @@ function QuickCast(spell,target)
 	end
 end
 -------------------------------------------------------------------------------
-function QkStone()
+function QuickStone()
 	local pwrtype=UnitPowerType('Player')
 	if pwrtype == 1 and HSBuffChk('Potion_69') == false then
 		CastShapeshiftForm(1)
