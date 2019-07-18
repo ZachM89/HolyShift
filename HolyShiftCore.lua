@@ -128,7 +128,7 @@ function HolyShift_SlashCommand(msg)
 	elseif HSCommand == nil or HSCommand == "" then
 		--HSPrint(HSCommand)
 		HSPrint("---------------------")
-		
+		HSPrint('|cffd08524HolyShift: |cffffffffMake a macro that just says |cffecd226/hsdps dps |cffffffffand put on the same key in human and cat form.')
 		if HSInnervateUse == 1 then
 			HSPrint('|cffd08524HolyShift: |cffffffffInnervate |cff24D040Enabled|cffd08524.|cffecd226 /hsdps innervate on |cffd08524or|cffecd226 /hsdps innervate off |cffd08524to change')
 		else
@@ -284,7 +284,7 @@ function HolyShift_OnEvent(event)
 	
 	if event == "VARIABLES_LOADED" then
 		HSPrint('|cffd08524HolyShift by Maulbatross Loaded')
-		HSPrint('|cffd08524Type /hsdps to show options')
+		HSPrint('|cffd08524HolyShift: |cffffffffType |cffecd226/hsdps |cffffffffto show options')
 		if HSInnervateUse == 1 then
 			HSPrint('|cffd08524HolyShift: |cffffffffInnervate |cff24D040Enabled')
 		else
