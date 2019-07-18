@@ -47,7 +47,7 @@ A cat druid one-button dps addon for vanilla WoW 1.12 and other useful feral dru
 # Included misc functions that can be called with /run FunctionName():
 - Make sure to match capitization and spelling exactly to use these functions.
 - AutoBuff()
-  - Uses consumables for cat dps in a raid. (Make sure you have yourself targeted so as not to put Jujus on someone else XD)
+  - Uses consumables for cat dps in a raid. (Make sure you have yourself or no other friendly players targeted so as not to put Jujus on someone else XD)
     - Will not overwrite buffs that are already active. 
 - Pummel()
   - A spammable macro to pop Manual Crowd Pummeler so as not to accidentally burn two charges in quick succession.
