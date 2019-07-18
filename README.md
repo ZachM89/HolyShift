@@ -8,6 +8,7 @@ A cat druid one-button dps addon for vanilla WoW 1.12 and other useful feral dru
   
 # To open settings type: /hsdps
   -Note: This is designed for use at level 60. I have not tested it below level 60.
+  
   -Note: Since I originally made this for myself, I only designed it to work with Luna Unit Frames. I may add compatibility with other druid mana bar addons in the future.
 # To use one button cat dps: 
   - Create a macro that only has the text: /hsdps dps
