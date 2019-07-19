@@ -567,8 +567,10 @@ function Atk(CorS,stealthyn,romyn,romcd)
 	if(romyn == true) then
 		shth = 30
 	end
-	if(string.find(GetInventoryItemLink('player',18), 'Idol of Ferocity')) then
-		idolofferocity = 3
+	if GetInventoryItemLink('player',18) ~= nil then
+		if(string.find(GetInventoryItemLink('player',18), 'Idol of Ferocity')) then
+			idolofferocity = 3
+		end
 	end
 	if UnitLevel('target') ~= -1 then
 		if UnitLevel('target') > 60 then
@@ -679,13 +681,13 @@ function CanShift()
 	local romcooldown,romeq,rombag,romslot = ItemInfo('Rune of Metamorphosis')
 	local romactive = HSBuffChk("INV_Misc_Rune")
 	if UnitName('target') == 'Loatheb' then
-		manathreshold = 900
+		--manathreshold = 900
 	end
 	if (currentMana >= manathreshold 
-	or (romcooldown == 0 and romeq ~= -1)
-	or (romactive == true and romcooldown > 282)
-	or mpcd == 0
-	or drcd == 0) 
+	or (romcooldown == 0 and romeq ~= -1 and UnitLevel('target') == -1)
+	or (romactive == true and romcooldown > 282 and UnitLevel('target') == -1)
+	or (mpcd == 0 and HSMPUse == 1 and UnitLevel('target') == -1 )
+	or (drcd == 0 and HSDRUse == 1 and UnitLevel('target') == -1 )) 
 	and HSShiftUse == 1 then
 		canshift = true
 	end
@@ -714,7 +716,7 @@ function Restore(rom,romyn,romcd)
 		if UnitMana('Player')<resto then
 			if(not IsSpellOnCD("Innervate")) and HSInnervateUse == 1 then
 				CastSpellByName("Innervate",1)
-			elseif HSBuffChk("Spell_Nature_Lightning") == false and nervcd < 340 and romyn == false then
+			elseif ((HSBuffChk("Spell_Nature_Lightning") == false and nervcd < 340) or UnitMana('Player') < 478) and romyn == false then
 				if rom ~= -1 and romcd == 0 then
 					if CheckInteractDistance('target',3) == 1 then
 						UseItemByName("Rune of Metamorphosis")
@@ -1058,7 +1060,7 @@ function AutoBuff()
 			elseif wfwslot ~= 0 then
 				UseContainerItem(wfwbag, wfwslot)
 			end
-		elseif HSBuffChk('Drink_03') == false and HSBuffChk('Drink_05') == false and HSBuffChk('Drink_04') == false and lqrbuff ~= 0 then
+		elseif HSBuffChk('Drink_03') == false and HSBuffChk('Drink_05') == false and HSBuffChk('Drink_04') == false and lqrbuff ~= 0 and whheq ~= 1 then
 			if t-cd >= (TSSW or 0) then
 				TSSW = t
 				if playername == "Maulbadude" then
