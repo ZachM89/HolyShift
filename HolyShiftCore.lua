@@ -696,7 +696,7 @@ function CanShift()
 end
 function Restore(rom,romyn,romcd)
 	local resto = 1500
-	local hthresh = 5
+	local hthresh = 0
 	local mpcd,_,mpbag,mpslot = ItemInfo('Major Mana Potion')
 	local smcd,_,smbag,smslot = ItemInfo('Superior Mana Potion')
 	local drcd,_,drbag,drslot = ItemInfo('Demonic Rune')
@@ -710,7 +710,7 @@ function Restore(rom,romyn,romcd)
 	end
 	if HSBuffChk("INV_Potion_97") == true  then
 		resto = 2800
-		hthresh = 1
+		hthresh = 0
 	end
 	if UnitHealth('target') > hthresh then
 		if UnitMana('Player')<resto then
