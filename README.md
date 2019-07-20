@@ -12,6 +12,11 @@ A cat druid one-button dps addon for vanilla WoW 1.12 and other useful feral dru
   - Note: Unlikely to work with new release of Classic WoW.
 # To use one button cat dps: 
   - Create a macro that only has the text: /hsdps dps
+  - Make sure you have these abilites on your action bars somewhere:
+    - Shred
+    - Claw
+    - Ferocious bite
+    - Auto Attack
   - If you put the macro button on your main bar, put it in the same spot for human form and cat form. (Otherwise you will have to 
     constantly alternate keys)
 # Features
