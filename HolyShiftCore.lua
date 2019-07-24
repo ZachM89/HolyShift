@@ -533,13 +533,13 @@ function HolyShiftAddon()
 					Restore(romeq,romactive,romcooldown)
 				end
 			end
-			if flcd == 0 and HSFLUse == 1 and CheckInteractDistance('target',3) == 1 then
+			if flcd == 0 and HSFLUse == 1 and (CheckInteractDistance('target',3) == 1 or UnitName('target') == "Eye of C'Thun") then
 				UseContainerItem(flbag, flslot)
 				if SpellIsTargeting() then
 					SpellTargetUnit("player")
 				end
 			end
-			if UnitAffectingCombat('Player') and jgeq ~= -1 and jgcd == 0 and UnitName('target') ~= "Razorgore the Untamed" and CheckInteractDistance('target',3) == 1 then
+			if UnitAffectingCombat('Player') and jgeq ~= -1 and jgcd == 0 and UnitName('target') ~= "Razorgore the Untamed" and (CheckInteractDistance('target',3) == 1 or UnitName('target') == "Eye of C'Thun") then
 				UseItemByName("Jom Gabbar")
 			end
 			if UnitName('target') == 'Chromaggus' then BrzRmv() end
@@ -599,13 +599,13 @@ function Atk(CorS,stealthyn,romyn,romcd)
 		if HSMCPUse == 1 then 
 			Pummel() 
 		end
-		if UnitAffectingCombat('Player') and kotseq ~= -1 and kotscd == 0 and UnitName('target') ~= "Razorgore the Untamed" and CheckInteractDistance('target',3) == 1 then
+		if UnitAffectingCombat('Player') and kotseq ~= -1 and kotscd == 0 and UnitName('target') ~= "Razorgore the Untamed" and (CheckInteractDistance('target',3) == 1 or UnitName('target') == "Eye of C'Thun") then
 			UseItemByName("Kiss of the Spider")
 		end 
-		if UnitAffectingCombat('Player') and eseq ~= -1 and escd == 0 and UnitName('target') ~= "Razorgore the Untamed" and CheckInteractDistance('target',3) == 1 then
+		if UnitAffectingCombat('Player') and eseq ~= -1 and escd == 0 and UnitName('target') ~= "Razorgore the Untamed" and (CheckInteractDistance('target',3) == 1 or UnitName('target') == "Eye of C'Thun") then
 			UseItemByName("Earthstrike")
 		end
-		if UnitAffectingCombat('Player') and zhmeq ~= -1 and zhmcd == 0 and UnitName('target') ~= "Razorgore the Untamed" and CheckInteractDistance('target',3) == 1 then
+		if UnitAffectingCombat('Player') and zhmeq ~= -1 and zhmcd == 0 and UnitName('target') ~= "Razorgore the Untamed" and (CheckInteractDistance('target',3) == 1 or UnitName('target') == "Eye of C'Thun") then
 			UseItemByName("Zandalarian Hero Medallion")
 		end
 	end
@@ -718,7 +718,7 @@ function Restore(rom,romyn,romcd)
 				CastSpellByName("Innervate",1)
 			elseif ((HSBuffChk("Spell_Nature_Lightning") == false and nervcd < 340) or UnitMana('Player') < 478) and romyn == false then
 				if rom ~= -1 and romcd == 0 then
-					if CheckInteractDistance('target',3) == 1 then
+					if CheckInteractDistance('target',3) == 1 or UnitName('target') == "Eye of C'Thun" then
 						UseItemByName("Rune of Metamorphosis")
 					end
 				else
@@ -858,7 +858,7 @@ function PopSkeleton()
 	if ohloc ~= nil then
 		if(string.find(ohloc, offhand)) then
 			local acgcdr,acgeq,acgbag,acgslot = ItemInfo(offhand)
-			if acgcdr == 0 and CheckInteractDistance('target',3) == 1 then
+			if acgcdr == 0 and (CheckInteractDistance('target',3) == 1 or UnitName('target') == "Eye of C'Thun") then
 				UseItemByName('Ancient Cornerstone Grimoire')
 			elseif acgcdr > 30 and HSOffhand ~= 'Ancient Cornerstone Grimoire' then
 				PickupInventoryItem('17')
@@ -877,7 +877,7 @@ function Pummel()
 			local mcpcdr = mcpdur - (GetTime() - mcpstart)
 			if mcpcdr < 0 then mcpcdr = 0 end
 			if mcpcdr == 0 then
-				if t-cd >= (TSSW or 0) and CheckInteractDistance('target',3) == 1 then 
+				if t-cd >= (TSSW or 0) and (CheckInteractDistance('target',3) == 1 or UnitName('target') == "Eye of C'Thun") then 
 					TSSW = t
 					UseItemByName('Manual Crowd Pummeler')
 				end
