@@ -563,7 +563,7 @@ function Atk(CorS,stealthyn,romyn,romcd)
 	local kotscd,kotseq,kotsbag,kotsslot = ItemInfo('Kiss of the Spider')
 	local escd,eseq,esbag,esslot = ItemInfo('Earthstrike')
 	local zhmcd,zhmeq,zhmbag,zhmslot = ItemInfo('Zandalarian Hero Medallion')
-	local fbthresh = 5
+	local fbthresh = 4
 	if(romyn == true) then
 		shth = 30
 	end
@@ -1209,7 +1209,7 @@ function QuickCast(spell,target)
 		end
 	end
 end
--------------------------------------------------------------------------------
+--------------------------------------------------------
 function QuickStone()
 	local pwrtype=UnitPowerType('Player')
 	if pwrtype == 1 and HSBuffChk('Potion_69') == false then
@@ -1222,7 +1222,7 @@ function QuickStone()
 		end
 	end
 end
----------------------------------------------------------------------------------
+--------------------------------------------------------
 function QuickHT()
 	local plname,_ = UnitName('player')
 	local pwrtype=UnitPowerType('Player')
@@ -1245,7 +1245,7 @@ function QuickHT()
 		end
 	end
 end
--------------------------------------------------------------------------------------
+--------------------------------------------------------
 function BLTaunt()
     local pname,_ = UnitName('player')
     local bltot,_ = UnitName('targettarget')
@@ -1265,5 +1265,235 @@ function BLTaunt()
     if bltot ~= pname and tauntyn == 1 then
         CastSpellByName('Growl')
     end
+end
+--------------------------------------------------------
+--[[function RankMotW() --Template----------------------------------------------------------------------
+	local mo=GetMouseFocus().unit
+	local spell = "Mark of the Wild(Rank "
+	local bracket = {49,39,29,19,9,0}
+	local ranks = {7,6,5,4,3,2}
+	if mo then
+		if UnitExists('target') then 
+			if not UnitIsUnit('target',mo) then
+				ClearTarget()
+			end
+			for i = 1, table.getn(bracket) do
+				--HSPrint(spell..ranks[i]..")")
+				if UnitLevel(mo) > bracket[i] then
+					CastSpellByName(spell..ranks[i]..')')
+					SpellTargetUnit(mo)
+					break
+				end
+			end
+			if not(UnitIsUnit('target',mo)) then
+				TargetLastTarget()
+			end
+		else
+			for i = 1, table.getn(bracket) do
+				--HSPrint(spell..ranks[i]..")")
+				if UnitLevel(mo) > bracket[i] then
+					CastSpellByName(spell..ranks[i]..')')
+					SpellTargetUnit(mo)
+					break
+				end
+			end
+		end
+	elseif UnitExists('target') then
+		for i = 1, table.getn(bracket) do
+			--HSPrint(spell..ranks[i]..")")
+			if UnitLevel('target') > bracket[i] then
+				CastSpellByName(spell..ranks[i]..')')
+				break
+			end
+		end
+	else
+		CastSpellByName(spell..ranks[1]..')')
+	end
+end]]
+--------------------------------------------------------
+--Test area
+function RankedMo(spell,bracket,ranks)
+	local mo=GetMouseFocus().unit
+	if mo then
+		if UnitExists('target') then 
+			if not UnitIsUnit('target',mo) then
+				ClearTarget()
+			end
+			for i = 1, table.getn(bracket) do
+				--HSPrint(spell..ranks[i]..")")
+				if UnitLevel(mo) > bracket[i] then
+					CastSpellByName(spell..ranks[i]..')')
+					SpellTargetUnit(mo)
+					break
+				end
+			end
+
+			if not(UnitIsUnit('target',mo)) then
+				TargetLastTarget()
+			end
+		else
+			for i = 1, table.getn(bracket) do
+				--HSPrint(spell..ranks[i]..")")
+				if UnitLevel(mo) > bracket[i] then
+					CastSpellByName(spell..ranks[i]..')')
+					SpellTargetUnit(mo)
+					break
+				end
+			end
+		end
+	elseif UnitExists('target') then
+		for i = 1, table.getn(bracket) do
+			--HSPrint(spell..ranks[i]..")")
+			if UnitLevel('target') > bracket[i] then
+				CastSpellByName(spell..ranks[i]..')')
+				break
+			end
+		end
+	end
+end
+function RankMotW()
+	local mo=GetMouseFocus().unit
+	local spell = "Mark of the Wild(Rank "
+	local bracket = {49,39,29,19,9,0}
+	local ranks = {7,6,5,4,3,2}
+	RankedMo(spell,bracket,ranks)
+end
+--------------------------------------------------------
+function RankThorns()
+	local mo=GetMouseFocus().unit
+	local spell = "Thorns(Rank "
+	local bracket = {43,33,23,13,3,0}
+	local ranks = {6,5,4,3,2,1}
+	RankedMo(spell,bracket,ranks)
+	--[[if mo then
+		if UnitExists('target') then 
+			if not UnitIsUnit('target',mo) then
+				ClearTarget()
+			end
+			for i = 1, table.getn(bracket) do
+				--HSPrint(spell..ranks[i]..")")
+				if UnitLevel(mo) > bracket[i] then
+					CastSpellByName(spell..ranks[i]..')')
+					SpellTargetUnit(mo)
+					break
+				end
+			end
+
+			if not(UnitIsUnit('target',mo)) then
+				TargetLastTarget()
+			end
+		else
+			for i = 1, table.getn(bracket) do
+				--HSPrint(spell..ranks[i]..")")
+				if UnitLevel(mo) > bracket[i] then
+					CastSpellByName(spell..ranks[i]..')')
+					SpellTargetUnit(mo)
+					break
+				end
+			end
+		end
+	elseif UnitExists('target') then
+		for i = 1, table.getn(bracket) do
+			--HSPrint(spell..ranks[i]..")")
+			if UnitLevel('target') > bracket[i] then
+				CastSpellByName(spell..ranks[i]..')')
+				break
+			end
+		end
+	else
+		CastSpellByName(spell..ranks[1]..')')
+	end]]
+end
+--------------------------------------------------------
+function RankRejuv()
+	local mo=GetMouseFocus().unit
+	local spell = "Rejuvenation(Rank "
+	local bracket = {49,47,41,35,29,23,17,11,5,0}
+	local ranks = {11,10,9,8,7,6,5,4,3,2}
+	RankedMo(spell,bracket,ranks)
+	--[[if mo then
+		if UnitExists('target') then 
+			if not UnitIsUnit('target',mo) then
+				ClearTarget()
+			end
+			for i = 1, table.getn(bracket) do
+				--HSPrint(spell..ranks[i]..")")
+				if UnitLevel(mo) > bracket[i] then
+					CastSpellByName(spell..ranks[i]..')')
+					SpellTargetUnit(mo)
+					break
+				end
+			end
+
+			if not(UnitIsUnit('target',mo)) then
+				TargetLastTarget()
+			end
+		else
+			for i = 1, table.getn(bracket) do
+				--HSPrint(spell..ranks[i]..")")
+				if UnitLevel(mo) > bracket[i] then
+					CastSpellByName(spell..ranks[i]..')')
+					SpellTargetUnit(mo)
+					break
+				end
+			end
+		end
+	elseif UnitExists('target') then
+		for i = 1, table.getn(bracket) do
+			--HSPrint(spell..ranks[i]..")")
+			if UnitLevel('target') > bracket[i] then
+				CastSpellByName(spell..ranks[i]..')')
+				break
+			end
+		end
+	else
+		CastSpellByName(spell..ranks[1]..')')
+	end]]
+end
+--------------------------------------------------------
+function RankRegrowth()
+	local mo=GetMouseFocus().unit
+	local spell = "Regrowth(Rank "
+	local bracket = {49,43,37,31,25,19,13,7,1}
+	local ranks = {9,8,7,6,5,4,3,2,1}
+	RankedMo(spell,bracket,ranks)
+	--[[if mo then
+		if UnitExists('target') then 
+			if not UnitIsUnit('target',mo) then
+				ClearTarget()
+			end
+			for i = 1, table.getn(bracket) do
+				--HSPrint(spell..ranks[i]..")")
+				if UnitLevel(mo) > bracket[i] then
+					CastSpellByName(spell..ranks[i]..')')
+					SpellTargetUnit(mo)
+					break
+				end
+			end
+
+			if not(UnitIsUnit('target',mo)) then
+				TargetLastTarget()
+			end
+		else
+			for i = 1, table.getn(bracket) do
+				--HSPrint(spell..ranks[i]..")")
+				if UnitLevel(mo) > bracket[i] then
+					CastSpellByName(spell..ranks[i]..')')
+					SpellTargetUnit(mo)
+					break
+				end
+			end
+		end
+	elseif UnitExists('target') then
+		for i = 1, table.getn(bracket) do
+			--HSPrint(spell..ranks[i]..")")
+			if UnitLevel('target') > bracket[i] then
+				CastSpellByName(spell..ranks[i]..')')
+				break
+			end
+		end
+	else
+		CastSpellByName(spell..ranks[1]..')')
+	end]]
 end
 --------------------------------------------------END MISC Feral Macros-----------------------------------
